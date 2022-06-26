@@ -1,0 +1,23 @@
+version: '3.4'
+
+services:
+  caseconfigdb:
+    container_name: caseconfigdb
+    restart: always
+    volumes:
+      - ${WEBAPP_STORAGE_HOME}/site:/data/db
+    ports:
+      - "27017:27017"
+
+  caseconfig.api:
+    container_name: caseconfigapi
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConfigSettings:ConnectionString=mongodb://caseconfigdb:27017"
+    depends_on:
+      - caseconfigdb
+    ports:
+      - "8000:80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro

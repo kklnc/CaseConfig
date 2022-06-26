@@ -1,0 +1,31 @@
+﻿@model CaseConfig.Web.Models.Configuration
+
+<form asp-controller="Home" asp-action="EditAdd">
+    Name: <input type="text" asp-for="Name" class="form-control" />
+    Type: <input type="text" asp-for="Type" class="form-control" />
+    Value: <input type="text" asp-for="Value" class="form-control" />
+    Is Active:
+    <select class="form-control" asp-for="IsActive">
+        @if (string.IsNullOrWhiteSpace(Model.Id))
+        {
+            <option value="true">true</option>
+            <option value="false">false</option>
+        }
+        else
+        {
+            if (Model.IsActive)
+            {
+                <option value="true" selected>true</option>
+                <option value="false">false</option>
+            }
+            else
+            {
+                <option value="true">true</option>
+                <option value="false" selected>false</option>
+            }
+        }
+    </select>
+    ApplicationName: <input type="text" asp-for="ApplicationName" class="form-control" />
+    <button class="btn btn-success" type="submit">Save</button>
+    <input type="hidden" asp-for="Id" />
+</form>

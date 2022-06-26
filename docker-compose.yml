@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+  caseconfigdb:
+    image: mongo
+
+  caseconfig.api:
+    image: ${DOCKER_REGISTRY-}caseconfigapi
+    build:
+      context: .
+      dockerfile: CaseConfig.API/Dockerfile
